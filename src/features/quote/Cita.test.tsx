@@ -4,10 +4,11 @@
 * Desarrollar test de integración sobre el componente “Quotes”, evaluando los distintos test cases que contemplen los distintos flujos de comportamiento.
 */
 
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../../app/store';
 import Cita from './Cita';
+import { userEvent } from '@testing-library/user-event/dist/types/setup';
 
 describe('Cita', () => {
 
@@ -43,7 +44,7 @@ describe('Cita', () => {
         expect(input).toBeInTheDocument();
         const quoteButton = screen.getByText(/Obtener cita aleatoria/i);
         expect(quoteButton).toBeInTheDocument();
-        fireEvent.change(input, { target: { value: 'test' } });
+        userEvent.type(input, 'test');
         expect(input.value).toBe('test');
         expect(quoteButton).toHaveTextContent(/Obtener/i);
     });
@@ -53,7 +54,7 @@ describe('Cita', () => {
         expect(input).toBeInTheDocument();
         const quoteButton = screen.getByText(/Obtener cita aleatoria/i);
         expect(quoteButton).toBeInTheDocument();
-        fireEvent.change(input, { target: { value: '123' } });
+        userEvent.type(input, '123');
         expect(input.value).toBe('123');
         expect(quoteButton).toHaveTextContent(/Obtener/i);
         act(() => {
@@ -68,7 +69,7 @@ describe('Cita', () => {
         expect(input).toBeInTheDocument();
         const quoteButton = screen.getByText(/Obtener cita aleatoria/i);
         expect(quoteButton).toBeInTheDocument();
-        fireEvent.change(input, { target: { value: 'bart' } });
+        userEvent.type(input, 'bart');
         expect(input.value).toBe('bart');
         expect(quoteButton).toHaveTextContent(/Obtener/i);
         act(() => {
